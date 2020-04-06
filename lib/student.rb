@@ -2,7 +2,7 @@ class Student
   attr_accessor :id, :name, :grade
 
   def self.new_from_db(row)
-    
+    new_student
 
   def self.all
     # retrieve all the rows from the "Students" database
