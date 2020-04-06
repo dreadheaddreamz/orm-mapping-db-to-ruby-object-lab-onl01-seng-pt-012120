@@ -10,8 +10,7 @@ class Student
 
   def self.all
     sql <<-SQL
-    SELECT *
-    FROM
+    SELECT * FROM
     SQL
   end
 
