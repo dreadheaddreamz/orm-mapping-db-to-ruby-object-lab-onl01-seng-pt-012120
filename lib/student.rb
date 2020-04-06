@@ -6,16 +6,19 @@ class Student
     new_student.id = row[0]
     new_student.name = row[1]
     new_student.grade = row[2]
+    new_student
   end
 
   def self.all
-    sql <<-SQL
+    sql = <<-SQL
     SELECT * FROM students
     SQL
+
     DB[:conn].execute(sql).map do |row|
       self.new_from_db(row)
     end
   end
+
 
   def self.find_by_name(name)
     sql = <<-SQL
@@ -28,15 +31,17 @@ class Student
     end.first
   end
   
+
   def save
     sql = <<-SQL
-      INSERT INTO students (name, grade) 
-      VALUES (?, ?)
-    SQL
+    INSERT INTO students (name, grade) 
+    VALUES (?, ?)
+  SQL
 
-    DB[:conn].execute(sql, self.name, self.grade)
+  DB[:conn].execute(sql, self.name, self.grade)
   end
   
+
   def self.create_table
     sql = <<-SQL
     CREATE TABLE IF NOT EXISTS students (
@@ -53,10 +58,8 @@ class Student
     sql = "DROP TABLE IF EXISTS students"
     DB[:conn].execute(sql)
   end
-end
 
-
-def self.all_students_in_grade_9
+  def self.all_students_in_grade_9
     sql = <<-SQL
     SELECT * FROM students
     WHERE grade = 9
